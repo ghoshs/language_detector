@@ -1,29 +1,11 @@
-import csv
-from preprocess import preprocess
+from preprocess import read_lines, read_labels, read_eng_labels
 
-def read_lines(file):
-	lines = []
-	with open(file, encoding='utf-8') as fp:
-		for line in fp:
-			lines.append(preprocess(line.strip()))
-	return lines
-
-
-def read_labels(file):
-	labels = []
-	with open(file, encoding='utf-8') as fp:
-		for line in fp:
-			labels.append(line.strip())
-	return labels
-
-
-def prepare_data(x_train, y_train, labels, choose_labels=None):
+def prepare_data(x_train, y_train, eng_labels, choose_labels=None):
 	all_languages = []
 	language_lines = {}
 	language_eng_labels = {}
-	with open(labels, encoding='utf-8') as f_label:
-		reader = csv.DictReader(f_label, delimiter=';')
-		language_eng_labels = {row['Label']: row['English'] for row in reader}
+	
+	language_eng_labels = read_eng_labels(eng_labels)
 	all_languages = list(language_eng_labels.keys())
 	lines = read_lines(x_train)
 	labels = read_labels(y_train)
