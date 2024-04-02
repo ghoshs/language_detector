@@ -1,5 +1,30 @@
 import re
+import csv
 import unicodedata
+
+def read_lines(file):
+	lines = []
+	with open(file, encoding='utf-8') as fp:
+		for line in fp:
+			lines.append(preprocess(line.strip()))
+	return lines
+
+
+def read_labels(file):
+	labels = []
+	with open(file, encoding='utf-8') as fp:
+		for line in fp:
+			labels.append(line.strip())
+	return labels
+
+
+def read_eng_labels(file):
+	language_eng_labels = {}
+	with open(file, encoding='utf-8') as f_label:
+		reader = csv.DictReader(f_label, delimiter=';')
+		language_eng_labels = {row['Label']: row['English'] for row in reader}
+	return language_eng_labels
+
 
 def preprocess(text):
 	norm = unicodedata.normalize('NFKC', text)
@@ -8,6 +33,7 @@ def preprocess(text):
 	clean = re.sub(r'[\d]', '', clean)
 	clean = ' '.join(clean.split())
 	return clean
+
 
 if __name__ == '__main__':
 	orig = "This is here, to test 1st pre-processing of 10 upcoming languages.. Be 100% prepared!"
