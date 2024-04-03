@@ -1,5 +1,7 @@
 # big data files
 wili-2018/
+profiles/
+pred/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

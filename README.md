@@ -38,6 +38,8 @@ Clone this repo:
 
 `git clone https://github.com/ghoshs/language_detector && cd language_detector`
 
+Or, unzip this folder
+
 Now you can run any of the following scripts to build, predict or evaluate the language detection system.
 
 Download and unip the wiLi-2018 dataset
@@ -69,8 +71,6 @@ Top-3 Predictions:  [('nrm', 0.7851420720896339), ('eng', 0.9166214269308668), (
 
 Generate the performance on test files. Faster when fewer language codes are used.
 
-- `python evaluate.py -x pred/x_test.txt -y pred/y_test.txt -p pred/y_pred.txt`: Computes accuracy scores overall and all languages for the first 14703 lines in the test file `wili-2018/x_test.txt`. The predictions are stored in `pred/y_pred.txt`. The overall accuracy over 235 languages is `0.886`. This increases with decreasing label space.
-
 - `python evaluate.py -x wili-2018/x_test.txt -y wili-2018/y_test.txt -i eng deu ben`: Generates accuracy scores for English, German and Bengali language texts. 
 
 ```
@@ -82,6 +82,7 @@ Language:  eng  Label:         English Num test data: 500  Accuracy: 0.994
 
 - `python evaluate.py`: Generates accuracy scores for all languages from the prediction file.
 
+- The prediction overall accuracy (for 235 languages, and average of 62 texts per language) for the first 14703 lines in the test file `wili-2018/x_test.txt` is `0.886`. This increases with decreasing label space.
 
 __Note__: Evaluating on all 235 languages takes time since the prediction function is not optimized. Evaluating 500 texts for a language takes an average of 2 mins.
 
